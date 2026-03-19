@@ -1,3 +1,5 @@
+import CalDemoButton from "./CalDemoButton";
+
 const productPillars = [
   {
     title: "Programmable Payment Rails",
@@ -56,9 +58,9 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <a className="primary-button" href="mailto:hello@whire.ai">
+              <CalDemoButton className="primary-button">
                 Book a demo
-              </a>
+              </CalDemoButton>
               <a className="secondary-button" href="#platform">
                 Explore platform
               </a>
