@@ -1,11 +1,14 @@
 "use client";
 
 import { getCalApi } from "@calcom/embed-react";
+import type { ReactNode } from "react";
 import { useEffect } from "react";
+
+import { cn } from "@/lib/utils";
 
 type CalDemoButtonProps = {
   className?: string;
-  children: string;
+  children: ReactNode;
 };
 
 export default function CalDemoButton({
@@ -40,7 +43,7 @@ export default function CalDemoButton({
   return (
     <button
       type="button"
-      className={className}
+      className={cn(className)}
       data-cal-namespace="15min"
       data-cal-link="whire/15min"
       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'

@@ -1,6 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans"
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-display"
+});
 
 export const metadata: Metadata = {
   title: "Whire | Agentic AI Payment Infrastructure",
@@ -15,7 +28,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${inter.variable} ${playfairDisplay.variable} min-h-screen bg-background font-sans text-foreground antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
