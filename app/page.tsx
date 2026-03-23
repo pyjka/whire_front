@@ -453,21 +453,34 @@ export default function Home() {
 
             <div className="grid gap-4 md:grid-cols-3">
               {[
-                "Agent establishes intent",
-                "Whire validates policy + payee",
-                "SEPA instant settles in under 10s"
+                {
+                  title: "Intent is established",
+                  description:
+                    "A payment request is created with clear context so the next step is automatic."
+                },
+                {
+                  title: "Payment checks are verified",
+                  description:
+                    "Built-in safeguards confirm the payment details before funds are routed."
+                },
+                {
+                  title: "SEPA instant settles in under 10s",
+                  description:
+                    "Funds move quickly with near real-time confirmation and visible final status."
+                }
               ].map((step) => (
                 <motion.div
-                  key={step}
+                  key={step.title}
                   variants={fadeUp}
                   whileHover={{ y: -2, scale: 1.01 }}
                   transition={{ duration: 0.24 }}
                   className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-5 transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#94bbd1]/35 hover:bg-white/[0.08] hover:shadow-[0_12px_30px_rgba(148,187,209,0.14)]"
                 >
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#94bbd1]/95">{step}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#94bbd1]/95">
+                    {step.title}
+                  </p>
                   <p className="mt-3 text-sm leading-7 text-[#fff6e5]/68">
-                    A streamlined flow designed for developers, operators, and regulated
-                    financial execution.
+                    {step.description}
                   </p>
                 </motion.div>
               ))}
