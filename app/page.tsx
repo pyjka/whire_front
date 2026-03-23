@@ -284,7 +284,7 @@ function Hero({
               Learn more
             </CalDemoButton>
             <p className="text-sm leading-7 text-[#fff6e5]/58">
-              Explore how your product can launch agentic checkout in weeks, not quarters.
+              Explore how your agent can start transacting in minutes, not weeks.
             </p>
           </div>
         </motion.div>
