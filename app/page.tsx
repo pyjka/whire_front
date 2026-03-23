@@ -18,7 +18,7 @@ import {
   Sparkles,
   Wand2
 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import CalDemoButton from "./CalDemoButton";
 import { Badge } from "@/components/ui/badge";
@@ -116,11 +116,15 @@ function GlassPanel({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={`rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] backdrop-blur-xl ${className ?? ""}`}
+    <motion.div
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -2 }}
+      viewport={{ once: false, amount: 0.25 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+      className={`rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#94bbd1]/30 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.04))] hover:shadow-[0_16px_44px_rgba(148,187,209,0.14)] ${className ?? ""}`}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -137,6 +141,7 @@ function FeatureCard({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -3, scale: 1.01 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
         duration: 0.65,
@@ -145,7 +150,7 @@ function FeatureCard({
       }}
       className="h-full"
     >
-      <Card className="h-full rounded-[1.75rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.035))]">
+      <Card className="h-full rounded-[1.75rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.035))] transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#94bbd1]/35 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05))] hover:shadow-[0_14px_40px_rgba(148,187,209,0.16)]">
         <CardContent className="flex h-full flex-col gap-6 p-6 md:p-7">
           <div className="flex items-start justify-between gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#94bbd1]/20 bg-[#94bbd1]/10 text-[#94bbd1]">
@@ -175,51 +180,16 @@ function FeatureCard({
   );
 }
 
-function FloatingBackground() {
-  return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      <motion.div
-        className="absolute left-[-10%] top-10 h-80 w-80 rounded-full bg-[#94bbd1]/14 blur-3xl"
-        animate={{ x: [0, 36, 0], y: [0, 24, 0], scale: [1, 1.06, 1] }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          repeatType: "mirror",
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute right-[-8%] top-52 h-[26rem] w-[26rem] rounded-full bg-[#2e556b]/18 blur-3xl"
-        animate={{ x: [0, -24, 0], y: [0, 30, 0], opacity: [0.6, 0.85, 0.6] }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "mirror",
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-[-6rem] left-1/3 h-80 w-80 rounded-full bg-[#fff6e5]/[0.05] blur-3xl"
-        animate={{ x: [0, 18, 0], y: [0, -16, 0], opacity: [0.36, 0.56, 0.36] }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          repeatType: "mirror",
-          ease: "easeInOut"
-        }}
-      />
-    </div>
-  );
-}
-
 function Hero({
   heroY,
   heroOpacity,
-  heroScale
+  heroScale,
+  activeSection
 }: {
   heroY: MotionValue<number>;
   heroOpacity: MotionValue<number>;
   heroScale: MotionValue<number>;
+  activeSection: string;
 }) {
   return (
     <motion.section
@@ -227,24 +197,62 @@ function Hero({
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
-      className="relative min-h-[94svh] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(46,85,107,0.34),rgba(31,56,71,0.84))] px-6 py-8 shadow-[0_35px_120px_rgba(0,0,0,0.24)] md:px-10 md:py-10"
+      className="relative min-h-[92svh] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(46,85,107,0.34),rgba(31,56,71,0.84))] px-5 py-6 shadow-[0_35px_120px_rgba(0,0,0,0.24)] md:min-h-[94svh] md:px-10 md:py-10"
     >
       <motion.header
         variants={fadeUp}
-        className="mb-12 flex items-center justify-between gap-6 lg:mb-16"
+        className="mb-8 flex items-center justify-between gap-6 md:mb-12 lg:mb-16"
       >
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-[linear-gradient(135deg,#94bbd1,#2e556b)] shadow-[0_0_0_8px_rgba(148,187,209,0.14)]" />
           <span className="text-base font-medium tracking-tight text-[#fff6e5]">Whire</span>
         </div>
-        <nav className="hidden items-center gap-7 text-sm text-[#fff6e5]/68 md:flex">
+        <nav className="hidden items-center gap-6 text-sm md:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="transition-colors hover:text-[#fff6e5]">
+            <a
+              key={item.href}
+              href={item.href}
+              className={`relative px-1 pb-2 pt-1 transition-colors duration-200 ${
+                activeSection === item.href.slice(1)
+                  ? "text-[#fff6e5]"
+                  : "text-[#fff6e5]/68 hover:text-[#fff6e5]/92"
+              }`}
+            >
               {item.label}
+              {activeSection === item.href.slice(1) ? (
+                <motion.span
+                  layoutId="desktop-nav-active-underline"
+                  className="absolute -bottom-[1px] left-0 right-0 h-[2px] rounded-full bg-[#94bbd1]"
+                  transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.35 }}
+                />
+              ) : null}
             </a>
           ))}
         </nav>
       </motion.header>
+
+      <motion.nav variants={fadeUp} className="mb-8 flex items-center gap-4 overflow-x-auto md:hidden">
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className={`relative shrink-0 px-1 pb-2 pt-1 text-xs uppercase tracking-[0.14em] transition-colors duration-200 ${
+              activeSection === item.href.slice(1)
+                ? "text-[#fff6e5]"
+                : "text-[#fff6e5]/72"
+            }`}
+          >
+            {item.label}
+            {activeSection === item.href.slice(1) ? (
+              <motion.span
+                layoutId="mobile-nav-active-underline"
+                className="absolute -bottom-[1px] left-0 right-0 h-[2px] rounded-full bg-[#94bbd1]"
+                transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.35 }}
+              />
+            ) : null}
+          </a>
+        ))}
+      </motion.nav>
 
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">
         <motion.div variants={fadeUp} className="space-y-7">
@@ -255,7 +263,7 @@ function Hero({
             Infrastructure for Europe&apos;s autonomous payment era
           </Badge>
 
-          <h1 className="text-balance text-5xl font-semibold leading-[0.94] tracking-[-0.05em] text-[#fff6e5] md:text-7xl">
+          <h1 className="text-balance text-4xl font-semibold leading-[0.94] tracking-[-0.05em] text-[#fff6e5] sm:text-5xl md:text-7xl">
             Give AI agents the ability to pay and get paid.
           </h1>
 
@@ -288,15 +296,23 @@ function Hero({
               <ArrowRight className="h-4 w-4 text-[#94bbd1]" />
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
-              {metrics.map((metric) => (
-                <div key={metric.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              {metrics.map((metric, index) => (
+                <motion.div
+                  key={metric.label}
+                  initial={{ opacity: 0.9 }}
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ y: -2, scale: 1.01 }}
+                  viewport={{ once: false, amount: 0.35 }}
+                  transition={{ duration: 0.24, delay: index * 0.04 }}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#94bbd1]/35 hover:bg-white/[0.08] hover:shadow-[0_12px_30px_rgba(148,187,209,0.14)]"
+                >
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[#fff6e5]/55">
                     {metric.label}
                   </p>
                   <p className="mt-2 text-2xl font-semibold tracking-tight text-[#fff6e5]">
                     {metric.value}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
             <div className="mt-4 rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,246,229,0.05),rgba(148,187,209,0.04))] p-4 text-sm leading-7 text-[#fff6e5]/70">
@@ -313,10 +329,55 @@ function Hero({
 export default function Home() {
   const mainRef = useRef<HTMLElement | null>(null);
   const featuresRef = useRef<HTMLElement | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const root = mainRef.current;
+    if (!root) {
+      return;
+    }
+
+    const trackedIds = ["features", "platform"];
+    const trackedSections = trackedIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (!trackedSections.length) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+          return;
+        }
+
+        if (root.scrollTop < 180) {
+          setActiveSection("");
+        }
+      },
+      {
+        root,
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.15, 0.35, 0.6]
+      }
+    );
+
+    trackedSections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   const { scrollYProgress } = useScroll({
     container: mainRef,
     target: featuresRef,
-    offset: ["start end", "start 24%"]
+    offset: ["start 95%", "start 58%"]
   });
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 58,
@@ -327,23 +388,24 @@ export default function Home() {
   const heroY = useTransform(smoothProgress, [0, 1], [0, -64]);
   const heroOpacity = useTransform(smoothProgress, [0, 1], [1, 0.63]);
   const heroScale = useTransform(smoothProgress, [0, 1], [1, 0.986]);
-  const featuresY = useTransform(smoothProgress, [0, 1], [62, 0]);
-  const featuresOpacity = useTransform(smoothProgress, [0, 1], [0.16, 1]);
 
   return (
     <main
       ref={mainRef}
-      className="grain-bg relative h-screen scroll-smooth overflow-y-auto overflow-x-hidden px-4 py-6 md:px-6 md:py-8"
+      data-scroll-root="landing"
+      className="relative h-screen scroll-smooth overflow-y-auto overflow-x-hidden px-3 py-4 sm:px-4 sm:py-6 md:px-6 md:py-8"
     >
-      <FloatingBackground />
-
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 md:gap-16">
-        <Hero heroY={heroY} heroOpacity={heroOpacity} heroScale={heroScale} />
+        <Hero
+          heroY={heroY}
+          heroOpacity={heroOpacity}
+          heroScale={heroScale}
+          activeSection={activeSection}
+        />
 
         <motion.section
           id="features"
           ref={featuresRef}
-          style={{ y: featuresY, opacity: featuresOpacity }}
           className="space-y-8 md:space-y-10"
         >
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-end">
@@ -398,7 +460,9 @@ export default function Home() {
                 <motion.div
                   key={step}
                   variants={fadeUp}
-                  className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-5"
+                  whileHover={{ y: -2, scale: 1.01 }}
+                  transition={{ duration: 0.24 }}
+                  className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-5 transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#94bbd1]/35 hover:bg-white/[0.08] hover:shadow-[0_12px_30px_rgba(148,187,209,0.14)]"
                 >
                   <p className="text-xs uppercase tracking-[0.2em] text-[#94bbd1]/95">{step}</p>
                   <p className="mt-3 text-sm leading-7 text-[#fff6e5]/68">
