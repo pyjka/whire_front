@@ -31,7 +31,7 @@ const navItems = [
 ];
 
 const metrics = [
-  { label: "SEPA instant finality", value: "<10s" },
+  { label: "Settlement finality", value: "<10s" },
   { label: "Verification of payee", value: "Built-in" },
   { label: "Card rails dependency", value: "Zero" }
 ];
@@ -41,7 +41,7 @@ const featureCards = [
     eyebrow: "Gateway",
     title: "Intent-to-IBAN orchestration",
     description:
-      "Translate agent purchase intent into bank-ready payment instructions routed through SEPA Instant rails.",
+      "Translate agent purchase intent into bank-ready payment instructions routed through real-time payment rails.",
     detail: "Bridge AI decisions to direct account movement without human checkout loops.",
     icon: CreditCard
   },
@@ -464,7 +464,7 @@ export default function Home() {
                     "Built-in safeguards confirm the payment details before funds are routed."
                 },
                 {
-                  title: "SEPA instant settles in under 10s",
+                  title: "Settlement completes in under 10s",
                   description:
                     "Funds move quickly with near real-time confirmation and visible final status."
                 }
