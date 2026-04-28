@@ -20,7 +20,6 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import CalDemoButton from "./CalDemoButton";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -184,12 +183,14 @@ function Hero({
   heroY,
   heroOpacity,
   heroScale,
-  activeSection
+  activeSection,
+  onJoinWaitlist
 }: {
   heroY: MotionValue<number>;
   heroOpacity: MotionValue<number>;
   heroScale: MotionValue<number>;
   activeSection: string;
+  onJoinWaitlist: () => void;
 }) {
   return (
     <motion.section
@@ -272,8 +273,10 @@ function Hero({
             turning autonomous intent into secure, compliant, real-time settlement.
           </p>
 
-          <div id="join" className="flex flex-col gap-4 pt-3 sm:flex-row sm:items-center">
-            <CalDemoButton
+          <div id="join" className="max-w-xl space-y-4 pt-3">
+            <button
+              type="button"
+              onClick={onJoinWaitlist}
               className={buttonVariants({
                 size: "lg",
                 variant: "secondary",
@@ -281,10 +284,10 @@ function Hero({
                   "rounded-[1.1rem] border border-white/10 bg-white/[0.05] px-7 py-6 text-[#fff6e5] shadow-[0_12px_36px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.09] hover:shadow-[0_18px_44px_rgba(0,0,0,0.25)]"
               })}
             >
-              Learn more
-            </CalDemoButton>
+              Join waitlist
+            </button>
             <p className="text-sm leading-7 text-[#fff6e5]/58">
-              Explore how your agent can start transacting in minutes, not weeks.
+              Be at the forefront of agentic payments.
             </p>
           </div>
         </motion.div>
@@ -330,6 +333,69 @@ export default function Home() {
   const mainRef = useRef<HTMLElement | null>(null);
   const featuresRef = useRef<HTMLElement | null>(null);
   const [activeSection, setActiveSection] = useState<string>("");
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isWaitlistOpen) {
+      return;
+    }
+
+    const doc = document;
+    const tally = window as Window & {
+      Tally?: {
+        loadEmbeds?: () => void;
+      };
+    };
+    const scriptSrc = "https://tally.so/widgets/embed.js";
+    const loadEmbeds = () => {
+      if (typeof tally.Tally?.loadEmbeds === "function") {
+        tally.Tally.loadEmbeds();
+        return;
+      }
+
+      doc.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((element) => {
+        const iframe = element as HTMLIFrameElement;
+
+        if (iframe.dataset.tallySrc) {
+          iframe.src = iframe.dataset.tallySrc;
+        }
+      });
+    };
+
+    if (typeof tally.Tally !== "undefined") {
+      loadEmbeds();
+      return;
+    }
+
+    if (doc.querySelector(`script[src="${scriptSrc}"]`) === null) {
+      const script = doc.createElement("script");
+      script.src = scriptSrc;
+      script.onload = loadEmbeds;
+      script.onerror = loadEmbeds;
+      doc.body.appendChild(script);
+      return;
+    }
+
+    loadEmbeds();
+  }, [isWaitlistOpen]);
+
+  useEffect(() => {
+    if (!isWaitlistOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsWaitlistOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isWaitlistOpen]);
 
   useEffect(() => {
     const root = mainRef.current;
@@ -401,6 +467,7 @@ export default function Home() {
           heroOpacity={heroOpacity}
           heroScale={heroScale}
           activeSection={activeSection}
+          onJoinWaitlist={() => setIsWaitlistOpen(true)}
         />
 
         <motion.section
@@ -488,6 +555,43 @@ export default function Home() {
           </GlassPanel>
         </motion.section>
       </div>
+
+      {isWaitlistOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#071018]/80 p-4 backdrop-blur-sm"
+          onClick={() => setIsWaitlistOpen(false)}
+          role="presentation"
+        >
+          <div
+            className="w-full max-w-3xl overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(46,85,107,0.95),rgba(18,32,41,0.98))] shadow-[0_35px_120px_rgba(0,0,0,0.45)]"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="join-waitlist-title"
+          >
+            <div className="border-b border-white/10 px-5 py-4 md:px-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-[#94bbd1]">Waitlist</p>
+              <h2 id="join-waitlist-title" className="mt-1 text-xl font-semibold text-[#fff6e5]">
+                Join waitlist
+              </h2>
+            </div>
+
+            <div className="p-3 md:p-4">
+              <iframe
+                data-tally-src="https://tally.so/embed/VL97Mj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1"
+                loading="lazy"
+                width="100%"
+                height="540"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+                title="Join Waitlist"
+                className="min-h-[540px] w-full rounded-[1rem] bg-transparent"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
