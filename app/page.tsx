@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   type MotionValue,
@@ -204,10 +206,16 @@ function Hero({
         variants={fadeUp}
         className="mb-8 flex items-center justify-between gap-6 md:mb-12 lg:mb-16"
       >
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-[linear-gradient(135deg,#94bbd1,#2e556b)] shadow-[0_0_0_8px_rgba(148,187,209,0.14)]" />
-          <span className="text-base font-medium tracking-tight text-[#fff6e5]">Whire</span>
-        </div>
+        <Link href="/" aria-label="Whire home" className="flex items-center">
+          <Image
+            src="/whire-wordmark-cream-transparent.svg"
+            alt="Whire"
+            width={248}
+            height={78}
+            priority
+            className="h-12 w-auto md:h-16"
+          />
+        </Link>
         <nav className="hidden items-center gap-6 text-sm md:flex">
           {navItems.map((item) => (
             <a
