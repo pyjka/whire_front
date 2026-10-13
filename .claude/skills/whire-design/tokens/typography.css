@@ -1,0 +1,37 @@
+/* Whire — type tokens. Roboto for display + UI, Roboto Mono for labels, code, amounts, IBANs. */
+:root {
+  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Size scale (px) */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-md:   16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  32px;
+  --text-4xl:  40px;
+  --text-5xl:  56px;
+  --text-6xl:  72px;
+  --text-display: 96px;
+
+  /* Weights: display is LIGHT, UI is MEDIUM, strong is BOLD */
+  --weight-display: 300;
+  --weight-body:    400;
+  --weight-ui:      500;
+  --weight-strong:  700;
+
+  /* Tracking */
+  --tracking-display: -0.03em;  /* large headlines */
+  --tracking-title:   -0.015em; /* 24–40px titles */
+  --tracking-label:    0.14em;  /* mono uppercase labels */
+  --tracking-eyebrow:  0.18em;  /* mono uppercase eyebrows */
+
+  /* Leading */
+  --leading-display: 1.0;
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-code:    1.6;
+}

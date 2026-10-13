@@ -2,21 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Whire design system — tokens and motifs.
+  Source of truth: .claude/skills/whire-design/tokens/*.css and components/components.css.
+  Petrol base, sand type, coral accent. No gradients, no shadows, 1.5px borders.
+*/
+
 @layer base {
   :root {
-    --background: 203 42% 8%;
-    --foreground: 41 100% 95%;
-    --card: 203 34% 10%;
-    --card-foreground: 41 100% 95%;
-    --primary: 202 38% 70%;
-    --primary-foreground: 203 42% 8%;
-    --secondary: 202 40% 29%;
-    --secondary-foreground: 41 100% 95%;
-    --muted: 204 29% 16%;
-    --muted-foreground: 41 43% 82%;
-    --border: 202 25% 24%;
-    --input: 202 25% 24%;
-    --ring: 202 38% 70%;
+    /* Petrol (brand base) */
+    --petrol-950: #04110F;
+    --petrol-900: #06191C;
+    --petrol-800: #092023;
+    --petrol-700: #0B2529;
+    --petrol-600: #133236;
+    --petrol-500: #1B3A3E;
+    --petrol-400: #2D5257;
+    --petrol-300: #7E9890;
+
+    /* Sand + sage */
+    --sand-50: #FBF3E3;
+    --sand-100: #F6E7C8;
+    --sand-200: #E9D7B4;
+    --sand-300: #D4C09A;
+    --sand-400: #B9A47C;
+    --sage-200: #C7C6B0;
+    --sage-300: #A3A692;
+
+    /* Coral (brand accent) */
+    --coral-700: #B0432A;
+    --coral-600: #E0603F;
+    --coral-500: #FF7A59;
+    --coral-300: #FFB59E;
+    --coral-100: #FFE1D6;
+    --coral-50: #FFF1EB;
+
+    /* Mark colours — wordmark dot / favicons only, never UI */
+    --electric-500: #1F7ADB;
+    --cream-100: #FFF6E5;
+    --ink-900: #071017;
+
+    /* Status */
+    --positive-500: #3FAE7A;
+    --negative-500: #E05252;
+    --warning-500: #E5A83A;
+    --white: #FFFFFF;
+
+    /* Semantic aliases: petrol theme (default) */
+    --surface-app: var(--petrol-900);
+    --surface-panel: var(--petrol-700);
+    --surface-raised: var(--petrol-600);
+    --surface-field: var(--petrol-800);
+    --surface-inverse: var(--sand-100);
+
+    --text-strong: var(--sand-100);
+    --text-body: var(--sage-200);
+    --text-muted: var(--petrol-300);
+    --text-accent: var(--coral-500);
+    --text-on-accent: var(--petrol-900);
+    --text-inverse: var(--petrol-900);
+
+    --border: var(--petrol-500);
+    --border-strong: var(--petrol-400);
+    --border-rail: var(--petrol-400);
+    --border-focus: var(--coral-500);
+
+    --accent: var(--coral-500);
+    --accent-hover: var(--coral-600);
+    --accent-press: var(--coral-700);
+    --accent-soft: var(--coral-300);
+    --accent-tint: rgba(255, 122, 89, 0.14);
+
+    --grid-line: rgba(246, 231, 200, 0.06);
+    --scrim: rgba(4, 17, 15, 0.6);
+
+    /* Layout */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --border-width: 1.5px;
+    --grid-size: 60px;
+    --shadow-focus: 0 0 0 3px rgba(255, 122, 89, 0.35);
+    --dur-fast: 120ms;
+    --dur: 180ms;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  /* Sand theme (light): wrap any subtree in .theme-sand */
+  .theme-sand,
+  [data-theme="sand"] {
+    --surface-app: var(--sand-50);
+    --surface-panel: #FFFBF2;
+    --surface-raised: var(--sand-200);
+    --surface-field: var(--white);
+    --surface-inverse: var(--petrol-900);
+
+    --text-strong: var(--petrol-900);
+    --text-body: #1F3A3C;
+    --text-muted: #4F6B6A;
+    --text-accent: var(--coral-700);
+    --text-inverse: var(--sand-100);
+
+    --border: #E3D3B3;
+    --border-strong: #CBB68E;
+    --border-rail: #CBB68E;
+
+    --accent-tint: rgba(255, 122, 89, 0.12);
+    --grid-line: rgba(6, 25, 28, 0.07);
+    --scrim: rgba(6, 25, 28, 0.45);
   }
 
   * {
@@ -28,44 +128,164 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(circle at top left, rgba(148, 187, 209, 0.18), transparent 20%),
-      radial-gradient(circle at 85% 10%, rgba(46, 85, 107, 0.32), transparent 24%),
-      radial-gradient(circle at bottom center, rgba(148, 187, 209, 0.1), transparent 26%),
-      linear-gradient(180deg, #071017 0%, #0b151c 35%, #0f1c24 100%);
-    font-family: var(--font-sans), sans-serif;
+    @apply bg-surface-app font-sans text-base leading-normal text-fg-body antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-display), var(--font-sans), sans-serif;
+    @apply font-light leading-tight tracking-title text-fg-strong;
   }
 
   a {
     @apply text-inherit no-underline;
   }
-}
 
-@layer utilities {
-  .bg-mesh {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(148, 187, 209, 0.18), transparent 24%),
-      radial-gradient(circle at 80% 10%, rgba(46, 85, 107, 0.22), transparent 28%),
-      linear-gradient(135deg, rgba(31, 56, 71, 0.88), rgba(15, 28, 36, 0.96));
+  code,
+  pre,
+  kbd {
+    @apply font-mono;
   }
 
-  .bg-grid {
-    background-image:
-      linear-gradient(rgba(148, 187, 209, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 187, 209, 0.08) 1px, transparent 1px);
-    background-size: 38px 38px;
+  ::selection {
+    background: var(--accent);
+    color: var(--text-on-accent);
   }
 
-  .text-balance {
-    text-wrap: balance;
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
   }
 }
 
+@layer components {
+  /* Text roles */
+  .wh-eyebrow {
+    @apply font-mono text-sm uppercase tracking-eyebrow text-fg-accent;
+  }
+
+  .wh-label {
+    @apply font-mono text-xs uppercase tracking-label text-fg-muted;
+  }
+
+  /* Motif 1 — blueprint grid */
+  .wh-grid {
+    background-color: var(--surface-app);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+  }
+
+  .wh-grid--columns {
+    background-color: var(--surface-app);
+    background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: calc(var(--grid-size) * 4) 100%;
+  }
+
+  /* Motif 2 — rail: a hairline with stations. Stacks on small screens, runs horizontally from md. */
+  .wh-rail {
+    position: relative;
+    display: grid;
+    row-gap: var(--space-10);
+  }
+
+  .wh-rail__stop {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-8);
+  }
+
+  .wh-rail__stop::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--border-width);
+    background: var(--border-rail);
+  }
+
+  .wh-rail__stop::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -5px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--surface-app);
+    border: var(--border-width) solid var(--text-muted);
+  }
+
+  .wh-rail__stop--active::after {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .wh-rail__stop--active .wh-label {
+    color: var(--text-accent);
+  }
+
+  @media (min-width: 768px) {
+    .wh-rail {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      column-gap: var(--space-8);
+    }
+
+    .wh-rail::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: var(--border-width);
+      background: var(--border-rail);
+    }
+
+    .wh-rail__stop::before {
+      display: none;
+    }
+  }
+
+  /* Dashed connector between nodes */
+  .wh-connector {
+    border-top: var(--border-width) dashed var(--border-rail);
+    align-self: center;
+    min-width: var(--space-10);
+  }
+
+  /* Panel (code / trace) */
+  .wh-panel {
+    @apply overflow-hidden rounded-lg border border-border bg-surface-field;
+  }
+
+  .wh-panel__bar {
+    @apply flex items-center justify-between gap-4 border-b border-border px-5 py-3 font-mono text-xs tracking-[0.08em] text-fg-muted;
+  }
+
+  .wh-panel__code {
+    @apply m-0 overflow-auto whitespace-pre p-5 font-mono text-sm text-fg-body;
+    line-height: 1.6;
+  }
+
+  .wh-panel__code .k {
+    color: var(--accent-soft);
+  }
+
+  .wh-panel__code .s {
+    color: var(--text-strong);
+  }
+
+  .wh-panel__code .c {
+    color: var(--text-muted);
+  }
+
+  .wh-panel__code .r {
+    color: var(--text-accent);
+  }
+}

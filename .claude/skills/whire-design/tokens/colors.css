@@ -1,0 +1,94 @@
+/* Whire — color tokens. Petrol base, sand type, coral accent. Electric #1F7ADB survives only as the dot in the wordmark/favicons. */
+:root {
+  /* Petrol (brand base) */
+  --petrol-950: #04110F;
+  --petrol-900: #06191C;  /* brand petrol — page/slide background */
+  --petrol-800: #092023;  /* fields, code panels */
+  --petrol-700: #0B2529;  /* cards / panels */
+  --petrol-600: #133236;
+  --petrol-500: #1B3A3E;  /* borders on petrol */
+  --petrol-400: #2D5257;  /* rails, dividers */
+  --petrol-300: #7E9890;  /* muted labels */
+
+  /* Sand + sage (type on petrol, paper for the light theme) */
+  --sand-50:  #FBF3E3;
+  --sand-100: #F6E7C8;  /* brand sand — headlines on petrol */
+  --sand-200: #E9D7B4;
+  --sand-300: #D4C09A;
+  --sand-400: #B9A47C;
+  --sage-200: #C7C6B0;  /* body text on petrol */
+  --sage-300: #A3A692;  /* secondary text on petrol */
+
+  /* Coral (brand accent) */
+  --coral-700: #B0432A;
+  --coral-600: #E0603F;
+  --coral-500: #FF7A59;  /* brand coral */
+  --coral-300: #FFB59E;
+  --coral-100: #FFE1D6;
+  --coral-50:  #FFF1EB;
+
+  /* Mark colours — wordmark dot / favicons only, never UI */
+  --electric-500: #1F7ADB;
+  --cream-100: #FFF6E5;
+  --ink-900: #071017;
+
+  /* Semantic */
+  --positive-500: #3FAE7A;
+  --positive-100: #D7EFE3;
+  --negative-500: #E05252;
+  --negative-100: #F7DADA;
+  --warning-500:  #E5A83A;
+  --warning-100:  #F8EBD2;
+  --white: #FFFFFF;
+
+  /* ---- Semantic aliases: PETROL theme (default) ---- */
+  --surface-app:      var(--petrol-900);
+  --surface-panel:    var(--petrol-700);
+  --surface-raised:   var(--petrol-600);
+  --surface-field:    var(--petrol-800);
+  --surface-inverse:  var(--sand-100);
+
+  --text-strong:      var(--sand-100);
+  --text-body:        var(--sage-200);
+  --text-muted:       var(--petrol-300);
+  --text-accent:      var(--coral-500);
+  --text-on-accent:   var(--petrol-900);
+  --text-inverse:     var(--petrol-900);
+
+  --border:           var(--petrol-500);
+  --border-strong:    var(--petrol-400);
+  --border-rail:      var(--petrol-400);
+  --border-focus:     var(--coral-500);
+
+  --accent:           var(--coral-500);
+  --accent-hover:     var(--coral-600);
+  --accent-press:     var(--coral-700);
+  --accent-soft:      var(--coral-300);
+  --accent-tint:      rgba(255, 122, 89, 0.14);
+
+  --grid-line:        rgba(246, 231, 200, 0.06);
+  --scrim:            rgba(4, 17, 15, 0.6);
+}
+
+/* ---- SAND theme (light): wrap any subtree in .theme-sand / .theme-cream / [data-theme="sand"] ---- */
+.theme-sand, .theme-cream, [data-theme="sand"] {
+  --surface-app:      var(--sand-50);
+  --surface-panel:    #FFFBF2;
+  --surface-raised:   var(--sand-200);
+  --surface-field:    var(--white);
+  --surface-inverse:  var(--petrol-900);
+
+  --text-strong:      var(--petrol-900);
+  --text-body:        #1F3A3C;
+  --text-muted:       #4F6B6A;
+  --text-accent:      var(--coral-700);
+  --text-inverse:     var(--sand-100);
+
+  --border:           #E3D3B3;
+  --border-strong:    #CBB68E;
+  --border-rail:      #CBB68E;
+
+  --accent-tint:      rgba(255, 122, 89, 0.12);
+  --grid-line:        rgba(6, 25, 28, 0.07);
+  --scrim:            rgba(6, 25, 28, 0.45);
+}

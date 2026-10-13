@@ -4,26 +4,33 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+/** Whire button. One primary per view, secondary for the alternative, ghost for tertiary. Never pill-shaped. */
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded border font-medium leading-none transition-[background-color,border-color,color,transform] active:translate-y-px focus-visible:outline-none focus-visible:shadow-focus disabled:pointer-events-none disabled:opacity-45",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-glow hover:-translate-y-0.5 hover:brightness-105",
+        primary:
+          "border-accent bg-accent text-fg-on-accent hover:border-accent-hover hover:bg-accent-hover active:border-accent-press active:bg-accent-press",
         secondary:
-          "border border-white/15 bg-white/5 text-foreground hover:border-white/25 hover:bg-white/10",
+          "border-border-strong bg-transparent text-fg-strong hover:border-fg-muted hover:bg-surface-raised",
         ghost:
-          "text-foreground/80 hover:bg-white/5 hover:text-foreground"
+          "border-transparent bg-transparent text-fg-body hover:bg-accent-tint hover:text-fg-strong",
+        inverse:
+          "border-surface-inverse bg-surface-inverse text-fg-inverse hover:opacity-90"
       },
       size: {
-        default: "h-11 px-5 py-2.5",
-        lg: "h-12 px-6 text-sm",
-        icon: "h-11 w-11 rounded-full"
+        sm: "h-9 px-4 text-sm",
+        default: "h-11 px-5 text-base",
+        lg: "h-[52px] px-6 text-lg",
+        icon: "h-11 w-11"
+      },
+      mono: {
+        true: "font-mono font-normal"
       }
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default"
     }
   }
@@ -36,12 +43,12 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, mono, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, mono, className }))}
         ref={ref}
         {...props}
       />

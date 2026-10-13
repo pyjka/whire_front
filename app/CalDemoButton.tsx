@@ -31,8 +31,8 @@ export default function CalDemoButton({
       cal?.("init", "15min", { origin: "https://app.cal.eu" });
       cal?.ns?.["15min"]?.("ui", {
         cssVarsPerTheme: {
-          light: { "cal-brand": "#fff6e5" },
-          dark: { "cal-brand": "#2e556b" }
+          light: { "cal-brand": "#B0432A" },
+          dark: { "cal-brand": "#FF7A59" }
         },
         hideEventTypeDetails: false,
         layout: "month_view"

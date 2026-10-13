@@ -1,26 +1,46 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Roboto, Roboto_Mono } from "next/font/google";
+import Script from "next/script";
 import type { ReactNode } from "react";
 
-import SubtleNodeNetworkBackground from "@/components/SubtleNodeNetworkBackground";
+import { site } from "@/lib/site";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sans"
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
+  display: "swap"
 });
 
-const playfairDisplay = Playfair_Display({
+const robotoMono = Roboto_Mono({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-display"
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto-mono",
+  display: "swap"
 });
 
 export const metadata: Metadata = {
-  title: "Whire | Agentic AI Payment Infrastructure",
-  description:
-    "Whire gives AI agents the payment rails to charge, settle, route, and reconcile money with confidence."
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    template: `%s · ${site.name}`
+  },
+  description: site.description,
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_GB",
+    url: "/",
+    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    description: site.description
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    description: site.description
+  },
+  robots: { index: true, follow: true }
 };
 
 type RootLayoutProps = {
@@ -30,9 +50,11 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfairDisplay.variable} relative min-h-screen bg-background font-sans text-foreground antialiased`}>
-        <SubtleNodeNetworkBackground />
-        <div className="relative z-10">{children}</div>
+      <body
+        className={`${roboto.variable} ${robotoMono.variable} min-h-screen bg-surface-app font-sans text-fg-body antialiased`}
+      >
+        {children}
+        <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
       </body>
     </html>
   );

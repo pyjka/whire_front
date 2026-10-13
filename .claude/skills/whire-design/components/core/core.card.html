@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Core components" subtitle="Button, Input, Card, Badge in the ink theme" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"></head>
+<body class="wh-grid" style="padding:24px;display:grid;gap:24px;">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+  <button class="wh-btn wh-btn--primary">Create transfer</button><button class="wh-btn wh-btn--secondary">View docs</button><button class="wh-btn wh-btn--ghost">Cancel</button><button class="wh-btn wh-btn--inverse">Get API key</button><button class="wh-btn wh-btn--secondary wh-btn--mono wh-btn--sm">whire.transfers.create</button><button class="wh-btn wh-btn--primary" disabled>Disabled</button>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+  <div class="wh-field"><label class="wh-field__label">Recipient IBAN</label><input class="wh-input wh-input--mono" placeholder="DE89 3704 0044 0532"></div>
+  <div class="wh-field wh-field--error"><label class="wh-field__label">Mandate</label><input class="wh-input wh-input--mono" value="mnd_7f3a"><div class="wh-field__hint">Mandate expired</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 40px 1fr;align-items:stretch;">
+  <div class="wh-card wh-card--compact"><div class="wh-card__index">01</div><div class="wh-card__title">Mandate &amp; consent</div><div class="wh-card__body">Users grant scoped authority once.</div><div class="wh-card__footer">→ scoped · SCA once · revocable</div></div>
+  <div class="wh-connector"></div>
+  <div class="wh-card wh-card--accent wh-card--compact"><div class="wh-card__index">02</div><div class="wh-card__title">Policy Guard</div><div class="wh-card__body">Rules enforced at execution.</div><div class="wh-card__footer">→ max €250 / transfer</div></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;"><span class="wh-badge"><span class="wh-badge__dot"></span>sandbox</span><span class="wh-badge wh-badge--accent">live now</span><span class="wh-badge wh-badge--outline-accent">SEPA Instant</span><span class="wh-badge wh-badge--positive"><span class="wh-badge__dot"></span>settled</span><span class="wh-badge wh-badge--negative">declined</span><span class="wh-badge wh-badge--warning">pending</span><span class="wh-badge wh-badge--strong">vop_verified</span></div>
+</body></html>

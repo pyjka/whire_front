@@ -1,0 +1,33 @@
+/* Whire — spacing, radius, borders, grid, shadow, motion. */
+:root {
+  /* 4px base */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+
+  /* Radius: soft, never pill — except badges */
+  --radius-sm: 6px;
+  --radius-md: 8px;    /* buttons, inputs, small cards */
+  --radius-lg: 10px;   /* cards, panels */
+  --radius-xl: 16px;   /* large surfaces */
+  --radius-pill: 999px;
+
+  /* Borders */
+  --border-width: 1.5px;
+
+  /* Blueprint grid (the brand's background texture) */
+  --grid-size: 60px;
+
+  /* Shadows: almost none — the system is flat. Focus ring only. */
+  --shadow-focus: 0 0 0 3px rgba(31, 122, 219, 0.35);
+  --shadow-panel: 0 1px 0 rgba(255, 246, 229, 0.03) inset;
+
+  /* Motion: restrained */
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Containers */
+  --container: 1200px;
+  --container-prose: 720px;
+}

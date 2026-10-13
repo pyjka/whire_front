@@ -1,0 +1,48 @@
+/* Whire — base resets, text styles and the two brand motifs (grid + rail). */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--surface-app);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { margin: 0; color: var(--text-strong); font-weight: var(--weight-display); letter-spacing: var(--tracking-title); line-height: var(--leading-tight); }
+h1 { font-size: var(--text-6xl); letter-spacing: var(--tracking-display); line-height: var(--leading-display); }
+h2 { font-size: var(--text-5xl); letter-spacing: var(--tracking-display); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); font-weight: var(--weight-body); }
+p { margin: 0; }
+a { color: var(--text-accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { text-decoration: underline; }
+code, pre, kbd { font-family: var(--font-mono); }
+::selection { background: var(--accent); color: var(--text-on-accent); }
+:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+/* Text roles */
+.wh-eyebrow { font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-accent); }
+.wh-label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--text-muted); }
+.wh-mono { font-family: var(--font-mono); color: var(--text-strong); }
+.wh-display { font-weight: var(--weight-display); font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); color: var(--text-strong); }
+.wh-muted { color: var(--text-muted); }
+
+/* Motif 1 — blueprint grid background */
+.wh-grid {
+  background-color: var(--surface-app);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+.wh-grid--columns { background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: calc(var(--grid-size) * 4) 100%; }
+
+/* Motif 2 — rail: a hairline with stations. Mark .wh-rail__stop--active for the electric station. */
+.wh-rail { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); column-gap: var(--space-8); padding-top: var(--space-8); }
+.wh-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--border-width); background: var(--border-rail); }
+.wh-rail__stop { position: relative; display: flex; flex-direction: column; gap: var(--space-2); }
+.wh-rail__stop::before { content: ""; position: absolute; left: 0; top: calc(-1 * var(--space-8) - 5px); width: 11px; height: 11px; border-radius: 50%; background: var(--surface-app); border: var(--border-width) solid var(--text-muted); }
+.wh-rail__stop--active::before { background: var(--accent); border-color: var(--accent); }
+.wh-rail__stop--active .wh-label { color: var(--text-accent); }
+
+/* Dashed connector between nodes */
+.wh-connector { border-top: var(--border-width) dashed var(--border-rail); align-self: center; min-width: var(--space-10); }
