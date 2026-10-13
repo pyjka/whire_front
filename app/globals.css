@@ -180,8 +180,14 @@
 
   .wh-grid--columns {
     background-color: var(--surface-app);
-    background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: calc(var(--grid-size) * 4) 100%;
+  }
+
+  /* Column lines only from md: on phones a single 240px line cuts through the copy. */
+  @media (min-width: 768px) {
+    .wh-grid--columns {
+      background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: calc(var(--grid-size) * 4) 100%;
+    }
   }
 
   /* Motif 2 — rail: a hairline with stations. Stacks on small screens, runs horizontally from md. */
@@ -269,8 +275,13 @@
   }
 
   .wh-panel__code {
-    @apply m-0 overflow-auto whitespace-pre p-5 font-mono text-sm text-fg-body;
+    @apply m-0 p-5 font-mono text-sm text-fg-body;
     line-height: 1.6;
+  }
+
+  /* One trace line: fixed-width key, value wraps on narrow screens instead of clipping. */
+  .wh-panel__line {
+    @apply grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-2;
   }
 
   .wh-panel__code .k {

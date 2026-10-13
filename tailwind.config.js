@@ -9,8 +9,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ["var(--font-roboto)", "Roboto", "system-ui", "sans-serif"],
-      mono: ["var(--font-roboto-mono)", "Roboto Mono", "ui-monospace", "monospace"]
+      sans: ["var(--font-cactus)", "Cactus Classical Serif", "Georgia", "serif"],
+      mono: ["var(--font-cactus)", "Cactus Classical Serif", "Georgia", "serif"]
     },
     // Soft radii, never pill — except badges.
     borderRadius: {

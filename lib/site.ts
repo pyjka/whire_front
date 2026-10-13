@@ -15,6 +15,6 @@ export const site = {
   // TODO: confirm registered legal entity name
   legalName: "Whire",
   // TODO: confirm registered address
-  address: "Paris, France",
+  address: "Amsterdam, Netherlands",
   privacyUpdated: "2026-10-13"
 } as const;

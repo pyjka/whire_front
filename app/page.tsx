@@ -173,23 +173,28 @@ function TracePanel() {
         <span>transfer · sandbox</span>
         <span>sepa_instant</span>
       </div>
-      <pre className="wh-panel__code">
-        <span className="c">{"// agent → Whire → bank"}</span>
-        {"\n"}
-        <span className="k">intent</span>
-        {"     pay "}
-        <span className="s">€250</span>
-        {" to DE89 3704 0044 0532 0130 00\n"}
-        <span className="k">policy</span>
-        {"     Policy Guard · max €250 / transfer · "}
-        <span className="s">pass</span>
-        {"\n"}
-        <span className="k">vop</span>
-        {"        Verification of Payee · "}
-        <span className="s">match</span>
-        {"\n"}
-        <span className="r">{"→ settled · 8.2s · vop_verified"}</span>
-      </pre>
+      <div className="wh-panel__code">
+        <p className="c">{"// agent → Whire → bank"}</p>
+        <p className="wh-panel__line">
+          <span className="k">intent</span>
+          <span>
+            pay <span className="s">€250</span> to DE89 3704 0044 0532 0130 00
+          </span>
+        </p>
+        <p className="wh-panel__line">
+          <span className="k">policy</span>
+          <span>
+            Policy Guard · max €250 / transfer · <span className="s">pass</span>
+          </span>
+        </p>
+        <p className="wh-panel__line">
+          <span className="k">vop</span>
+          <span>
+            Verification of Payee · <span className="s">match</span>
+          </span>
+        </p>
+        <p className="r">{"→ settled · 8.2s · vop_verified"}</p>
+      </div>
     </div>
   );
 }
@@ -291,11 +296,6 @@ function Hero({
           <h1 className="text-balance text-5xl font-light leading-display tracking-display text-fg-strong sm:text-6xl md:text-7xl xl:text-[88px]">
             Give AI agents the ability to pay and get paid, safely.
           </h1>
-
-          <p className="max-w-prose text-lg leading-normal text-fg-body">
-            Whire is the transaction layer between agents, merchants, and banks,
-            turning autonomous intent into secure, compliant, real-time settlement.
-          </p>
 
           <div id="join" className="flex flex-col items-start gap-4 pt-2">
             <JoinWaitlistButton size="lg" />

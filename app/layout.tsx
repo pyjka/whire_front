@@ -1,22 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Cactus_Classical_Serif } from "next/font/google";
 import Script from "next/script";
 import type { ReactNode } from "react";
 
 import { site } from "@/lib/site";
 
-const roboto = Roboto({
+const cactus = Cactus_Classical_Serif({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
-  display: "swap"
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-roboto-mono",
+  weight: "400",
+  variable: "--font-cactus",
   display: "swap"
 });
 
@@ -51,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${robotoMono.variable} min-h-screen bg-surface-app font-sans text-fg-body antialiased`}
+        className={`${cactus.variable} min-h-screen bg-surface-app font-sans text-fg-body antialiased`}
       >
         {children}
         <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
