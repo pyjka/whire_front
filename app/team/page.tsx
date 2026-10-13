@@ -24,10 +24,9 @@ const team = [
     hook: "The engineer a top-tier bank trusted with compliance at 3M+ requests a day.",
     bio: [
       "Alex has already built what most fintechs only promise. At Alfa-Bank he engineered the compliance risk-scoring and automated account-opening systems for small-business customers across Russia and the CIS: APIs handling 3M+ requests a day, and ML models served across the entire bank.",
-      "He scaled backend and API architecture at VK, a platform of 95M monthly users, and at Sequoia-backed Huspy led the backend squad that built the mortgage-broker portal and an AI document service from zero.",
-      "Then he founded clogg.ai, an LLM-powered automation layer for e-commerce, and took it from zero to one as CTO. Whire is where both halves of that career meet: bank-grade compliance and agent-native product."
+      "He scaled backend and API architecture at VK, a platform of 95M monthly users, and at Sequoia-backed Huspy led the backend squad that built the mortgage-broker portal and an AI document service from zero."
     ],
-    trace: "→ Alfa-Bank · VK · Huspy · clogg.ai"
+    trace: "→ Alfa-Bank · VK · Huspy"
   },
   {
     name: "Pavel",
