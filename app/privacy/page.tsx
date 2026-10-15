@@ -15,7 +15,7 @@ const sections = [
     id: "who",
     title: "Who we are",
     body: [
-      `${site.legalName} ("Whire", "we") operates this website at ${site.url.replace("https://", "")}. We are the data controller for the personal data described in this policy. You can reach us at ${site.email}.`
+      `${site.legalName} ("Whire", "we") operates this website at ${site.url.replace("https://", "")}. Our registered address is ${site.address}. We are the data controller for the personal data described in this policy. You can reach us at ${site.email}.`
     ]
   },
   {

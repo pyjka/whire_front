@@ -10,11 +10,9 @@ export const site = {
     "Whire turns agent intent into authorized, compliant bank transfers: consent, controls and settlement in one integration. SEPA Instant first, every A2A rail next.",
   // TODO: confirm contact email
   email: "hello@whire.ai",
-  // TODO: confirm LinkedIn company URL
-  linkedin: "https://www.linkedin.com/company/whire",
+  linkedin: "https://www.linkedin.com/company/whire-ai/",
   // TODO: confirm registered legal entity name
   legalName: "Whire",
-  // TODO: confirm registered address
-  address: "Amsterdam, Netherlands",
+  address: "Haarlemmerweg 331-333 A, 1051 LH Amsterdam, The Netherlands",
   privacyUpdated: "2026-10-13"
 } as const;
